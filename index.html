@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Souvik Ghosh - AI Researcher</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3B82F6;
+            --dark: #1F2937;
+            --darker: #111827;
+            --light: #F3F4F6;
+            --gray: #6B7280;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom right, #111827, #1F2937);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            background: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .nav-logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--light);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 6rem 0;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 30%;
+            width: 40%;
+            height: 40%;
+            background: radial-gradient(circle, rgba(59,130,246,0.1), transparent);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            z-index: 1;
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-title span {
+            background: linear-gradient(to right, #3B82F6, #60A5FA);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero-description {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--primary);
+            border-radius: 50%;
+            filter: blur(50px);
+            opacity: 0.2;
+            animation: pulse 4s infinite;
+        }
+
+        /* Sections */
+        section {
+            padding: 6rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        /* Experience Cards */
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .tab-button {
+            background: var(--dark);
+            color: var(--gray);
+            border: none;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab-button.active {
+            background: var(--primary);
+            color: var(--light);
+        }
+
+        .tab-button:first-child {
+            border-radius: 0.5rem 0 0 0.5rem;
+        }
+
+        .tab-button:last-child {
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: rgba(31, 41, 55, 0.5);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background: rgba(31, 41, 55, 0.8);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-icon {
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            border-radius: 0.75rem;
+        }
+
+        .card-title {
+            margin-bottom: 0.25rem;
+        }
+
+        .card-company {
+            color: var(--gray);
+        }
+
+        .card-list {
+            list-style: none;
+        }
+
+        .card-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            color: var(--gray);
+        }
+
+        .card-list i {
+            color: var(--primary);
+            margin-top: 0.25rem;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--dark);
+            color: var(--gray);
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: var(--light);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-content">
+            <a href="#" class="nav-logo">SG</a>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#education">Education</a>
+                <a href="#experience">Experience</a>
+                <a href="#publications">Publications</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="about">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <div class="hero-tag">
+                    <i class="fas fa-code"></i>
+                    <span>AI Researcher & Data Scientist</span>
+                </div>
+                <h1 class="hero-title">Souvik <span>Ghosh</span></h1>
+                <p class="hero-description">
+                    Innovating at the intersection of AI and Generative multimedia.
+                    Currently researching advanced lipreading and speech synthesis technologies at IIIT Hyderabad.
+                </p>
+                <div class="social-links">
+                    <a href="mailto:souvik.g@research.iiit.ac.in" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/souvikg544" class="social-link">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/souvikg544" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/dp.png" alt="Souvik Ghosh">
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="experience-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div>
+                            <h3 class="card-title">MS by Research, CSE</h3>
+                            <p class="card-company">IIIT Hyderabad | Grade: 8.5</p>
+                            <p class="card-company">2024-2026</p>
+                        </div>
+                    </div>
+                    <ul class="card-list">
+                        <li>
+                            <i class="fas fa-chevron-right"></i>
+                            <span>Courses taken: Statistical Methods in AI, Digital Image Processing, Advanced NLP(LLMs), Computer Vision, Technology, Product and Entrepreneurship</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-chevron-right"></i>
+                            <span>Research focus on multimodal AI, Speech Technologies, LLMs and Representation Learning.</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-chevron-right"></i>
+                            <span>Working with CVIT Lab in the Audio Visual Team guided by Professor CV Jawahar and Professor Vinay Namboodiri</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div>
+                            <h3 class="card-title">BTech, Applied Electronics and Instrumentation</h3>
+                            <p class="card-company">HITK, Kolkata | Grade: 8.12</p>
+                            <p class="card-company">2019-2023</p>
+                        </div>
+                    </div>
+                    <ul class="card-list">
+                        <li>
+                            <i class="fas fa-chevron-right"></i>
+                            <span>Explored the beauty of interdisciplinary education.</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-chevron-right"></i>
+                            <span>Final Year Thesis on IOT and Edge ML for patients with Epilepsy</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-chevron-right"></i>
+                            <span>Major Projects in Harassment Detection and Women Safety. Runners up at Nasscom Lab 2 Market</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="tab-container">
+                <button class="tab-button active" data-tab="research">Research</button>
+                <button class="tab-button" data-tab="entrepreneurial">Entrepreneurial</button>
+            </div>
+            <div class="experience-grid" id="research-content">
+                <!-- Research Experience Cards -->
+            </div>
+            <div class="experience-grid" id="entrepreneurial-content" style="display: none;">
+                <!-- Entrepreneurial Experience Cards -->
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Tab Switching Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.tab-button');
+            const contents = {
+                research: document.getElementById('research-content'),
+                entrepreneurial: document.getElementById('entrepreneurial-content')
+            };
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    // Show/hide content
+                    const tabName = tab.dataset.tab;
+                    Object.entries(contents).forEach(([name, content]) => {
+                        content.style.display = name === tabName ? 'grid' : 'none';
+                    });
+                });
+            });
+
+            // Populate experience content
+            const researchContent = [
+                {
+                    title: 'Research Engineer',
+                    company: 'Sync Labs (YC W24)',
+                    icon: 'fa-code',
+                    items: [
+                        'Improved facial quality by 15% using GAN-based models',
+                        'Led research on diffusion-based lip-sync models',
+                        'Enhanced lip-sync technology for multimedia industry'
+                    ]
+                },
+                {
+                    title: 'Research Fellow',
+                    company: 'CVIT, IIIT Hyderabad',
+                    icon: 'fa-microscope',
+                    items: [
+                        'Researched Hypernetworks for personalized lipreading models',
+                        'Developed on-device models with 40% parameter reduction',
+                        'Advanced research in facial dynamics'
+                    ]
+                },
+                {
+                    title: 'Data Scientist',
+                    company: 'Whilter AI',
+                    icon: 'fa-brain',
+                    items: [
+                        'Pioneered initiatives in advertising through deepfakes and Text to Speech',
+                        'Led Indian wedding video analysis for automatic trailer generation',
+                        'Researched GAN-based approaches for facial appearance synthesis'
+                    ]
+                },
+                {
+                    title: 'Freelance Data Scientist',
+                    company: 'Brainbox Innovations',
+                    icon: 'fa-lightbulb',
+                    items: [
+                        'Led organization\'s transformation achieving 3X market presence',
+                        'Developed custom AI solutions and wrappers',
+                        'Integrated advanced LLM technologies'
+                    ]
+                },
+            ];
+
+            const entrepreneurialContent = [
+                
+                {
+                    title: 'Solo Founder',
+                    company: 'AIXCHANGE',
+                    icon: 'fa-lightbulb',
+                    items: [
+                        'Created HelpBY an app to let any person receive immediate nearby help within 1 min.',
+                        'Received grant from Global Youth Mobilization, Runners up at NASSCOM Lab 2 Market.',
+                        'Met wonderful people working for a change in red light areas and Bangladesh Borders.'
+                    ]
+                },
+                {
+                    title: 'Top Rated Freelancer',
+                    company: 'Upwork',
+                    icon: 'fa-award',
+                    items: [
+                        'Ranked in Top 10% worldwide with 4.5+ rating, within a year',
+                        'Completed 50+ successful AI and ML projects working with various Multi National Companies',
+                        'Specialized in computer vision, classical ML and LLM applications'
+                    ]
+                },
+                
+                
+            ];
+
+            // Function to create experience card
+            function createCard(data) {
+                return `
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas ${data.icon}"></i>
+                            </div>
+                            <div>
+                                <h3 class="card-title">${data.title}</h3>
+                                <p class="card-company">${data.company}</p>
+                            </div>
+                        </div>
+                        <ul class="card-list">
+                            ${data.items.map(item => `
+                                <li>
+                                    <i class="fas fa-chevron-right"></i>
+                                    <span>${item}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            // Populate research content
+            const researchContainer = document.getElementById('research-content');
+            researchContainer.innerHTML = researchContent.map(createCard).join('');
+
+            // Populate entrepreneurial content
+            const entrepreneurialContainer = document.getElementById('entrepreneurial-content');
+            entrepreneurialContainer.innerHTML = entrepreneurialContent.map(createCard).join('');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <!-- Skills Section -->
+    <section id="skills" class="bg-gradient">
+        <div class="container">
+            <h2 class="section-title">Technical Expertise</h2>
+            <div class="experience-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3 class="card-title">AI & ML</h3>
+                    </div>
+                    <ul class="card-list">
+                        <li><i class="fas fa-chevron-right"></i><span>Multimodal Generative AI</span></li>
+                        <li><i class="fas fa-chevron-right"></i><span>LipSync & Speech Technologies</span></li>
+                        <li><i class="fas fa-chevron-right"></i><span>Computer Vision & LLMs</span></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <h3 class="card-title">MLOps</h3>
+                    </div>
+                    <ul class="card-list">
+                        <li><i class="fas fa-chevron-right"></i><span>AWS, Azure, Google Cloud</span></li>
+                        <li><i class="fas fa-chevron-right"></i><span>Docker</span></li>
+                        <li><i class="fas fa-chevron-right"></i><span>FastAPI & Flask</span></li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="card-title">Frameworks</h3>
+                    </div>
+                    <ul class="card-list">
+                        <li><i class="fas fa-chevron-right"></i><span>PyTorch</span></li>
+                        <li><i class="fas fa-chevron-right"></i><span>TensorFlow</span></li>
+                        <li><i class="fas fa-chevron-right"></i><span>Hugging Face</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications">
+        <div class="container">
+            <h2 class="section-title">Publications</h2>
+            <div class="experience-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div>
+                            <h3 class="card-title">reSenseNet: Ensemble Early Fusion Deep Learning Architecture</h3>
+                            <p class="card-company">IHCI 2021</p>
+                        </div>
+                    </div>
+                    <p class="card-list">Published in International Conference on Intelligent Human Computer Interaction</p>
+                    <a href="https://doi.org/10.1007/978-3-030-98404-5_62" class="social-link" style="margin-top: 1rem;">
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div>
+                            <h3 class="card-title">Speech@SCIS: Annotated Indian Video Dataset</h3>
+                            <p class="card-company">Smart Intelligent Computing and Applications</p>
+                        </div>
+                    </div>
+                    <p class="card-list">Published in Smart Intelligent Computing and Applications, Volume 1</p>
+                    <a href="https://doi.org/10.1007/978-981-16-9669-5_45" class="social-link" style="margin-top: 1rem;">
+                        <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: var(--darker); padding: 2rem 0; margin-top: 4rem;">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                <p>© 2024 Souvik Ghosh. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="mailto:souvik.g@research.iiit.ac.in" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="tel:+918697282257" class="social-link">
+                        <i class="fas fa-phone"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/souvikg544" class="social-link">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/souvikg544" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
